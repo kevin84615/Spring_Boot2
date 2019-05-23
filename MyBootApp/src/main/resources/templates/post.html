@@ -7,18 +7,16 @@
 <body>
 	<h1>Spring Sample</h1>
 	<div>
-    	Spring Sample Test
+    	Post Data
 	</div>
-	<p>Now <span th:text="${now}"></span></p>
 	<br />
 	<form method="post" action="formPost">
 		<span>name: </span>
-		<input type="text" name="name" value="" />
+		<span th:text="${name}"></span>
 		<br />
 		<span>age: </span>
-		<input type="text" name="age" value="" />
+		<span th:text="${age}"></span>
 		<br />
-		<input type="submit" value="send" />
 	</form>
 </body>
 </html>
