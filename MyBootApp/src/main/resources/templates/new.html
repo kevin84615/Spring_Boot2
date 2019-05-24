@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>ログイン</h1>
+	<h1>新規</h1>
 	<div>
     	Spring Sample Test
 	</div>
-	<p>Now <span th:text="${now}"></span></p>
+	<p>Create <span th:text="${now}"></span></p>
 	<br />
-	<form method="post" action="formPost">
+	<form method="post" action="result">
 		<span>ID: </span>
 		<input type="text" name="user_id" value="" />
 		<br />
@@ -20,9 +20,10 @@
 		<br />
 		<input type="submit" value="send" />
 	</form>
-	<form method="post" action="new">
+	
+	<form method="post" action="other">
 		<br />
-		<input type="submit" value="new" />
+		<input type="submit" value="cancel" />
 	</form>
 </body>
 </html>
