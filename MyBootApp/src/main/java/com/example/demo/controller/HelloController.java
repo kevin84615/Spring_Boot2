@@ -1,91 +1,90 @@
 package com.example.demo.controller;
 
-import java.util.Date;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import com.example.demo.entity.*;
+import com.example.demo.repositories.UserRepository;
 
 @Controller
 public class HelloController {
 	
-	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
-	public ModelAndView index() {
-
-		ModelAndView mv = new ModelAndView();
-
-		mv.setViewName("index");
-
-		mv.addObject("now", new Date().toString());
-
-		return mv;
-	}
+//	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
+//	public ModelAndView index() {
+//
+//		ModelAndView mav = new ModelAndView();
+//
+//		mav.setViewName("index");
+//
+//		mav.addObject("now", new Date().toString());
+//
+//		return mav;
+//	}
 
 	// POST用のパラメータを受け取る
+	@Autowired
+	UserRepository repository;
+	
 	@RequestMapping(value = { "/formPost" }, method = { RequestMethod.POST })
-	public ModelAndView postTest1(@RequestParam(value = "user_id", required = true) String user_id,
+	public ModelAndView member_POST(@RequestParam(value = "userid", required = true) String userid,
 			@RequestParam(value = "password", required = true) String password) {
 
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 
-		mv.setViewName("post");
+		mav.setViewName("post");
+		mav.addObject("userid", userid);
+		mav.addObject("password", password);
+		Iterable<UserEntity> list = repository.findAll();
+		mav.addObject("data",list);
 
-		// modelに設定して画面に表示するようにする
-		mv.addObject("user_id", user_id);
-		mv.addObject("password", password);
-
-		return mv;
+		return mav;
 	}
 
 	// GET用のパラメータを受け取る
-	@RequestMapping(value = { "/formPost" }, method = { RequestMethod.GET })
-	public ModelAndView getTest1(@RequestParam(value = "user_id", required = true) String user_id,
+	@RequestMapping(value = { "/formPost" }, method =  RequestMethod.GET )
+	public ModelAndView member_GET(@RequestParam(value = "userid", required = true) String userid,
 			@RequestParam(value = "password", required = true) String password) {
 
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 
-		mv.setViewName("post");
+		mav.setViewName("post");
+		mav.addObject("userid", userid);
+		mav.addObject("password", password);
+		Iterable<UserEntity> list = repository.findAll();
+		mav.addObject("data",list);
 
-		// modelに設定して画面に表示するようにする
-		mv.addObject("user_id", user_id);
-		mv.addObject("password", password);
+		return mav;
+	}
 
-		return mv;
+	@RequestMapping(value = { "/result" }, method =  RequestMethod.POST )
+	@Transactional(readOnly=false)
+	public ModelAndView form(@ModelAttribute("formModel") UserEntity user,ModelAndView mav){
+
+		repository.saveAndFlush(user);
+		return mav;
 	}
 
 	// POST用のパラメータを受け取る
-	@RequestMapping(value = { "/new" }, method = { RequestMethod.POST })
-	public ModelAndView postTest2() {
+	@RequestMapping(value = { "/user" }, method = { RequestMethod.POST })
+	public ModelAndView create_POST() {
 
-		ModelAndView mv = new ModelAndView();
-
-		mv.setViewName("new");
-
-		return mv;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("new");
+		return mav;
 	}
 
 	// GET用のパラメータを受け取る
-	@RequestMapping(value = { "/new" }, method = { RequestMethod.GET })
-	public ModelAndView getTest2() {
+	@RequestMapping(value = { "/user" }, method = { RequestMethod.GET })
+	public ModelAndView create_GET() {
 
-		ModelAndView mv = new ModelAndView();
-
-		mv.setViewName("new");
-
-		return mv;
-	}
-
-	// POST用のパラメータを受け取る
-	@RequestMapping(value = { "/result" }, method = { RequestMethod.POST })
-	public ModelAndView postTest3() {
-
-		ModelAndView mv = new ModelAndView();
-
-		mv.setViewName("result");
-
-		return mv;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("new");
+		return mav;
 	}
 
 }

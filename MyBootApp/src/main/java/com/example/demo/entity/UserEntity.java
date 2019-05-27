@@ -14,10 +14,10 @@ public class UserEntity implements Serializable
     private Long id;
 
     @Column(name = "t_user")
-    private String user_id;
+    public String userid;
 
     @Column(name = "t_password")
-    private String password;
+    public String password;
 
     public Long getId() {
         return id;
@@ -27,12 +27,12 @@ public class UserEntity implements Serializable
         this.id = id;
     }
 
-    public String getuser() {
-        return user_id;
+    public String getUserId() {
+        return userid;
     }
 
-    public void setuser(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String user_id) {
+        this.userid = user_id;
     }
 
     public String getpassword() {

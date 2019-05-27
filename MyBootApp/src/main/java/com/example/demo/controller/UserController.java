@@ -37,12 +37,4 @@ public class UserController {
         userJPA.deleteById(id);
         return userJPA.findAll();
     }
-    
-    @RequestMapping(value = "/result",method = RequestMethod.POST)
-    public UserEntity create(UserEntity entity)
-    {
-    	return userJPA.save(entity);
-    }
-    
-
 }

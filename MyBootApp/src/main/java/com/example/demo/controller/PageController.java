@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class NewController {
+public class PageController {
 	@RequestMapping("/")
 	public ModelAndView index (ModelAndView mav){
 		mav.setViewName("index");
@@ -16,9 +16,9 @@ public class NewController {
 
 		return "redirect:/";
 	}	
-	@RequestMapping("/new")
-	public String user(){
-
-		return "forward:/";
-	}	
+//	@RequestMapping("/user")
+//	public String user(){
+//
+//		return "forward:/";
+//	}	
 }

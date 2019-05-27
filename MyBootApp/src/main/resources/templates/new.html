@@ -11,13 +11,13 @@
 	</div>
 	<p>Create <span th:text="${now}"></span></p>
 	<br />
-	<form method="post" action="user/result">
+	<form method="post" action="/result" th:object="${fromModel}">
 		<span>ID: </span>
-		<input type="text" name="user_id" value="" />
-		<br />
+		<input type="text" name="userid" th:value="${userid}" />
+		<br/>
 		<span>Password: </span>
-		<input type="text" name="password" value="" />
-		<br />
+		<input type="text" name="password" th:value="${password}" />
+		<br/>
 		<input type="submit" value="create" />
 	</form>
 	
@@ -25,5 +25,14 @@
 		<br />
 		<input type="submit" value="cancel" />
 	</form>
+	<!--<table>
+	  <form method="post" action="/" th:object="${fromModel}">
+	<tr><td><label for="user_id">user_id</label></td>
+	<td><input type="text" name="user_id" th:value="*{user_id}"/></td></tr>
+	<tr><td><label for="password">password</label></td>
+	<td><input type="text" name="password" th:value="*{password}"/></td></tr>
+	<tr><td></td><td><input type="submit"/></td></tr>
+	</form> 
+	</table>-->
 </body>
 </html>
