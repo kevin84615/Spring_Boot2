@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import com.tuyano.springboot.repositories.MyDataRepository;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HeloController {
@@ -53,6 +54,24 @@ public class HeloController {
 	public ModelAndView update(@ModelAttribute MyData mydata, 
 			ModelAndView mav) {
 		repository.saveAndFlush(mydata);
+		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable int id,
+			ModelAndView mav) {
+		mav.setViewName("delete");
+		mav.addObject("title","delete mydata.");
+		Optional<MyData> data = repository.findById((long)id);
+		mav.addObject("formModel",data.get());
+		return mav;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@Transactional(readOnly=false)
+	public ModelAndView remove(@RequestParam long id, 
+			ModelAndView mav) {
+		repository.deleteById(id);
 		return new ModelAndView("redirect:/");
 	}
 	
