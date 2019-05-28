@@ -12,6 +12,8 @@ import com.tuyano.springboot.repositories.MyDataRepository;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 @Controller
 public class HeloController {
@@ -21,10 +23,11 @@ public class HeloController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(
-			@ModelAttribute("formModel") MyData mydata, 
+		@ModelAttribute("formModel") MyData mydata, 
 			ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("msg","this is sample content.");
+		mav.addObject("formModel",mydata);
 		Iterable<MyData> list = repository.findAll();
 		mav.addObject("datalist",list);
 		return mav;
@@ -33,10 +36,22 @@ public class HeloController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView form(
-			@ModelAttribute("formModel") MyData mydata, 
-			ModelAndView mav) {
-		repository.saveAndFlush(mydata);
-		return new ModelAndView("redirect:/");
+			@ModelAttribute("formModel") 
+			@Validated MyData mydata,
+			BindingResult result,
+			ModelAndView mov) {
+		ModelAndView res = null;
+		if (!result.hasErrors()){
+			repository.saveAndFlush(mydata);
+			res = new ModelAndView("redirect:/");
+		} else {
+			mov.setViewName("index");
+			mov.addObject("msg","sorry, error is occured...");
+			Iterable<MyData> list = repository.findAll();
+			mov.addObject("datalist",list);
+			res = mov;
+		}
+		return res;
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -80,24 +95,23 @@ public class HeloController {
 		MyData d1 = new MyData();
 		d1.setId(1);
 		d1.setName("tuyano");
-		d1.setAge(123);
+		d1.setAge(20);
 		d1.setMail("syoda@tuyano.com");
 		d1.setMemo("this is my data!");
 		repository.saveAndFlush(d1);
 		MyData d2 = new MyData();
 		d2.setId(2);
 		d2.setName("hanako");
-		d2.setAge(15);
+		d2.setAge(18);
 		d2.setMail("hanako@flower");
 		d2.setMemo("my girl friend.");
 		repository.saveAndFlush(d2);
 		MyData d3 = new MyData();
 		d3.setId(3);
 		d3.setName("sachiko");
-		d3.setAge(37);
+		d3.setAge(30);
 		d3.setMail("sachico@happy");
 		d3.setMemo("my work friend...");
 		repository.saveAndFlush(d3);
 	}
-
 }
