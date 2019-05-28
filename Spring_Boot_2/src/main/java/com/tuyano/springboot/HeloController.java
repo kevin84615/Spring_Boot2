@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.annotation.PostConstruct;
 import com.tuyano.springboot.repositories.MyDataRepository;
 
 @Controller
@@ -34,6 +34,28 @@ public class HeloController {
 			ModelAndView mav) {
 		repository.saveAndFlush(mydata);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@PostConstruct
+	public void init(){
+		MyData d1 = new MyData();
+		d1.setName("tuyano");
+		d1.setAge(123);
+		d1.setMail("syoda@tuyano.com");
+		d1.setMemo("this is my data!");
+		repository.saveAndFlush(d1);
+		MyData d2 = new MyData();
+		d2.setName("hanako");
+		d2.setAge(15);
+		d2.setMail("hanako@flower");
+		d2.setMemo("my girl friend.");
+		repository.saveAndFlush(d2);
+		MyData d3 = new MyData();
+		d3.setName("sachiko");
+		d3.setAge(37);
+		d3.setMail("sachico@happy");
+		d3.setMemo("my work friend...");
+		repository.saveAndFlush(d3);
 	}
 
 }
