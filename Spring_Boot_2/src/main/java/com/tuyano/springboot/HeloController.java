@@ -39,18 +39,21 @@ public class HeloController {
 	@PostConstruct
 	public void init(){
 		MyData d1 = new MyData();
+		d1.setId(1);
 		d1.setName("tuyano");
 		d1.setAge(123);
 		d1.setMail("syoda@tuyano.com");
 		d1.setMemo("this is my data!");
 		repository.saveAndFlush(d1);
 		MyData d2 = new MyData();
+		d2.setId(2);
 		d2.setName("hanako");
 		d2.setAge(15);
 		d2.setMail("hanako@flower");
 		d2.setMemo("my girl friend.");
 		repository.saveAndFlush(d2);
 		MyData d3 = new MyData();
+		d3.setId(3);
 		d3.setName("sachiko");
 		d3.setAge(37);
 		d3.setMail("sachico@happy");
