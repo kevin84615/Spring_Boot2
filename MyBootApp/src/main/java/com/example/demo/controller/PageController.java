@@ -16,9 +16,4 @@ public class PageController {
 
 		return "redirect:/";
 	}	
-//	@RequestMapping("/user")
-//	public String user(){
-//
-//		return "forward:/";
-//	}	
 }

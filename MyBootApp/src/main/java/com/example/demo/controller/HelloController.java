@@ -13,20 +13,7 @@ import com.example.demo.repositories.UserRepository;
 
 @Controller
 public class HelloController {
-	
-//	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
-//	public ModelAndView index() {
-//
-//		ModelAndView mav = new ModelAndView();
-//
-//		mav.setViewName("index");
-//
-//		mav.addObject("now", new Date().toString());
-//
-//		return mav;
-//	}
 
-	// POST用のパラメータを受け取る
 	@Autowired
 	UserRepository repository;
 	
@@ -45,7 +32,7 @@ public class HelloController {
 		return mav;
 	}
 
-	// GET用のパラメータを受け取る
+
 	@RequestMapping(value = { "/formPost" }, method =  RequestMethod.GET )
 	public ModelAndView member_GET(@RequestParam(value = "userid", required = true) String userid,
 			@RequestParam(value = "password", required = true) String password) {
@@ -69,7 +56,6 @@ public class HelloController {
 		return mav;
 	}
 
-	// POST用のパラメータを受け取る
 	@RequestMapping(value = { "/user" }, method = { RequestMethod.POST })
 	public ModelAndView create_POST() {
 
@@ -78,7 +64,6 @@ public class HelloController {
 		return mav;
 	}
 
-	// GET用のパラメータを受け取る
 	@RequestMapping(value = { "/user" }, method = { RequestMethod.GET })
 	public ModelAndView create_GET() {
 

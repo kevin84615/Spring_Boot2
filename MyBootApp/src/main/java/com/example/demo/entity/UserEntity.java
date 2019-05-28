@@ -1,11 +1,11 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 @Table(name = "t_user")
-public class UserEntity implements Serializable
+public class UserEntity 
 {
 
     @Id
@@ -31,8 +31,8 @@ public class UserEntity implements Serializable
         return userid;
     }
 
-    public void setUserId(String user_id) {
-        this.userid = user_id;
+    public void setUserId(String userid) {
+        this.userid = userid;
     }
 
     public String getpassword() {

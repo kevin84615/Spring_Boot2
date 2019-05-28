@@ -13,10 +13,12 @@
 	<br />
 	<form method="post" action="/result" th:object="${fromModel}">
 		<span>ID: </span>
-		<input type="text" name="userid" th:value="${userid}" />
+		<input type="text" id="userid" name="userid" value="" />
+		<!-- <input type="text" id="userid" name="userid" value="${userid}" />  --> <!-- fail -->
+		<!-- <input type="text" id="userid" name="userid" value="*{userid}" />  --> <!-- error -->
 		<br/>
 		<span>Password: </span>
-		<input type="text" name="password" th:value="${password}" />
+		<input type="text" id="password" name="password" value="" />
 		<br/>
 		<input type="submit" value="create" />
 	</form>
@@ -25,14 +27,5 @@
 		<br />
 		<input type="submit" value="cancel" />
 	</form>
-	<!--<table>
-	  <form method="post" action="/" th:object="${fromModel}">
-	<tr><td><label for="user_id">user_id</label></td>
-	<td><input type="text" name="user_id" th:value="*{user_id}"/></td></tr>
-	<tr><td><label for="password">password</label></td>
-	<td><input type="text" name="password" th:value="*{password}"/></td></tr>
-	<tr><td></td><td><input type="submit"/></td></tr>
-	</form> 
-	</table>-->
 </body>
 </html>
