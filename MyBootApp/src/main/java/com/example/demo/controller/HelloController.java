@@ -16,7 +16,7 @@ public class HelloController {
 
 	@Autowired
 	UserRepository repository;
-	
+
 	@RequestMapping(value = { "/formPost" }, method = { RequestMethod.POST })
 	public ModelAndView member_POST(@RequestParam(value = "userid", required = true) String userid,
 			@RequestParam(value = "password", required = true) String password) {
@@ -27,13 +27,12 @@ public class HelloController {
 		mav.addObject("userid", userid);
 		mav.addObject("password", password);
 		Iterable<UserEntity> list = repository.findAll();
-		mav.addObject("data",list);
+		mav.addObject("data", list);
 
 		return mav;
 	}
 
-
-	@RequestMapping(value = { "/formPost" }, method =  RequestMethod.GET )
+	@RequestMapping(value = { "/formPost" }, method = RequestMethod.GET)
 	public ModelAndView member_GET(@RequestParam(value = "userid", required = true) String userid,
 			@RequestParam(value = "password", required = true) String password) {
 
@@ -43,15 +42,18 @@ public class HelloController {
 		mav.addObject("userid", userid);
 		mav.addObject("password", password);
 		Iterable<UserEntity> list = repository.findAll();
-		mav.addObject("data",list);
+		mav.addObject("data", list);
 
 		return mav;
 	}
 
-	@RequestMapping(value = { "/result" }, method =  RequestMethod.POST )
-	@Transactional(readOnly=false)
-	public ModelAndView form(@ModelAttribute("formModel") UserEntity user,ModelAndView mav){
+	@RequestMapping(value = { "/result" }, method = RequestMethod.POST)
+	@Transactional(readOnly = false)
+	public ModelAndView form(
+			@ModelAttribute("formModel") @RequestParam(value = "userid", required = true) String userid,
+			UserEntity user, ModelAndView mav) {
 
+		user.setUserId(userid);
 		repository.saveAndFlush(user);
 		return mav;
 	}
