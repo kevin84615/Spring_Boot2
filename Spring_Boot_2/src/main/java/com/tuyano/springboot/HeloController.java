@@ -60,7 +60,7 @@ public class HeloController {
 		mav.setViewName("index");
 		mav.addObject("title","Find Page");
 		mav.addObject("msg","MyDataのサンプルです。");
-		Iterable<MyData> list = dao.findByAge(10, 40);//repository.findAllOrderByName(); //dao.getAll(); //●
+		Iterable<MyData> list = dao.findByAge(1, 200);//repository.findAllOrderByName(); //dao.getAll(); //●
 		mav.addObject("datalist", list);
 		return mav;
 	}
