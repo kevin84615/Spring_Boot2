@@ -12,6 +12,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.*;
 import javax.persistence.NamedQuery;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="mydata")
@@ -22,6 +25,17 @@ import javax.persistence.NamedQuery;
 			)
 	)
 public class MyData {
+	@OneToMany(cascade=CascadeType.ALL)
+	@Column(nullable = true)
+	private List<MsgData> msgdatas;
+	
+	public List<MsgData> getMsgdatas() {
+		return msgdatas;
+	}
+
+	public void setMsgdatas(List<MsgData> msgdatas) {
+		this.msgdatas = msgdatas;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
