@@ -56,13 +56,15 @@ public class HeloController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView mav) {	
+	public ModelAndView index(ModelAndView mav) {
 		mav.setViewName("index");
+		mav.addObject("title","Find Page");
 		mav.addObject("msg","MyDataのサンプルです。");
-		Iterable<MyData> list = dao.getAll(); //●
+		Iterable<MyData> list = dao.findByAge(10, 40);//repository.findAllOrderByName(); //dao.getAll(); //●
 		mav.addObject("datalist", list);
 		return mav;
 	}
+
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public ModelAndView find(ModelAndView mav) {
 		mav.setViewName("find");

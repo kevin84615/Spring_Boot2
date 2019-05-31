@@ -5,14 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.*;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Table(name="mydata")
+@NamedQueries (
+		@NamedQuery(
+				name="findByAge",
+				query="from MyData where age > :min and age < :max"
+			)
+	)
 public class MyData {
 
 	@Id
