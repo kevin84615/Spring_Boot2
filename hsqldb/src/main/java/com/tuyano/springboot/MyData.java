@@ -15,9 +15,7 @@ import javax.persistence.NamedQuery;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+
 
 @Entity
 @Table(name="mydata")
