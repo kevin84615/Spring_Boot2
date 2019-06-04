@@ -22,4 +22,11 @@ public class MyDataRestController {
 	public MyData restBy(@PathVariable int num) {
 		return service.get(num);
 	}
+	@Autowired
+	MySampleBean bean;
+
+	@RequestMapping("/count")
+	public int count() {
+		return bean.count();
+	}
 }
