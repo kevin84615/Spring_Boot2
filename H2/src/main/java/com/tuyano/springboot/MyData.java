@@ -10,13 +10,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hibernate.validator.constraints.*;
 import javax.persistence.NamedQuery;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
-
+@XmlRootElement
 @Entity
 @Table(name="mydata")
 @NamedQueries (
