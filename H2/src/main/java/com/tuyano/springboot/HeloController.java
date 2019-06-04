@@ -12,10 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest; 
 import com.tuyano.springboot.repositories.MyDataRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
 public class HeloController {
+	
+	@Autowired
+	MyDataBean myDataBean;
 	
 	@Autowired
 	MyDataRepository repository;
@@ -89,6 +93,18 @@ public class HeloController {
 			List<MyData> list = service.find(param); //●
 			mav.addObject("datalist", list);
 		}
+		return mav;
+	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView indexById(@PathVariable long id,
+			ModelAndView mav) {
+		mav.setViewName("pickup");
+		mav.addObject("title","Pickup Page");
+		String table = "<table>"
+				+ myDataBean.getTableTagById(id)
+				+ "</table>";
+		mav.addObject("msg","pickup data id = " + id);
+		mav.addObject("data",table);
 		return mav;
 	}
 
