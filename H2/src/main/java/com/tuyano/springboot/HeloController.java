@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -105,6 +107,15 @@ public class HeloController {
 				+ "</table>";
 		mav.addObject("msg","pickup data id = " + id);
 		mav.addObject("data",table);
+		return mav;
+	}
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ModelAndView index(ModelAndView mav, Pageable pageable) {
+		mav.setViewName("index");
+		mav.addObject("title","Find Page");
+		mav.addObject("msg","MyDataのサンプルです。");
+		Page<MyData> list = repository.findAll(pageable); //●
+		mav.addObject("datalist", list);
 		return mav;
 	}
 
