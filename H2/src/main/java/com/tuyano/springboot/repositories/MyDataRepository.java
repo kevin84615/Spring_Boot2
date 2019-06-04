@@ -10,11 +10,13 @@ import org.springframework.data.repository.query.Param;
 import com.tuyano.springboot.MyData;
 
 @Repository
-public interface MyDataRepository  extends JpaRepository<MyData, Long> {
-	
+public interface MyDataRepository extends JpaRepository<MyData, Long> {
+
 	@Query("SELECT d FROM MyData d ORDER BY d.name")
 	List<MyData> findAllOrderByName();
+
 	@Query("from MyData where age > :min and age < :max")
 	public List<MyData> findByAge(@Param("min") int min, @Param("max") int max);
+
 	public Page<MyData> findAll(Pageable pageable);
 }
