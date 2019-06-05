@@ -25,7 +25,7 @@ td {
 <body>
 	<h1 th:text="${title}">Delete page</h1>
 	<table>
-		<form method="post" action="/delete" th:object="${formModel}">
+		<form method="post" action="/deleteEnd" th:object="${formModel}">
 			<input type="hidden" name="todoID" th:value="*{todoID}" />
 			<tr>
 				<td><p th:text="|todoid：　*{todoID}|"></p></td>
@@ -38,5 +38,8 @@ td {
 		</tr>
 		</form>
 	</table>
+	<form method="post" action="other">
+		<br /> <input type="submit" value="cancel" />
+	</form>
 </body>
 </html>

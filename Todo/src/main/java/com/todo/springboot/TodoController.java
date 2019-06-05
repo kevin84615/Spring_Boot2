@@ -76,7 +76,7 @@ public class TodoController {
 		return new ModelAndView("redirect:/");
 	}
 	
-	@RequestMapping(value = "/delete/{todoID}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable int todoID,
 			ModelAndView mav) {
 		mav.setViewName("delete");
@@ -85,13 +85,23 @@ public class TodoController {
 		mav.addObject("formModel",data.get());
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView remove(@RequestParam long todoID, 
+	public ModelAndView remove(@ModelAttribute("formModel") TodoData mydata,@RequestParam long todoID, 
+			ModelAndView mav) {
+		mav.setViewName("delete");
+		mav.addObject("title","delete mydata.");
+		Optional<TodoData> data = repository.findById((long)todoID);
+		mav.addObject("formModel",data.get());
+		return mav;
+	}
+
+	@RequestMapping(value = "/deleteEnd", method = RequestMethod.POST)
+	@Transactional(readOnly=false)
+	public ModelAndView removeconfirm(@RequestParam long todoID, 
 			ModelAndView mav) {
 		repository.deleteById(todoID);
 		return new ModelAndView("redirect:/");
 	}
-
 }
