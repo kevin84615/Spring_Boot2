@@ -1,47 +1,67 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>top page</title>
-	<meta http-equiv="Content-Type" 
-		content="text/html; charset=UTF-8" />
-	<style>
-	h1 { font-size:18pt; font-weight:bold; color:gray; }
-	body { font-size:13pt; color:gray; margin:5px 25px; }
-	pre { border: solid 3px #ddd; padding: 10px; }
-	tr { margin:5px; }
-	th { padding:5px; color:white; background:darkgray; }
-	td { padding:5px; color:black; background:#f0f0f0; }
-	</style>
+<title>top page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+h1 {
+	font-size: 18pt;
+	font-weight: bold;
+	color: gray;
+}
+
+body {
+	font-size: 13pt;
+	color: gray;
+	margin: 5px 25px;
+}
+
+pre {
+	border: solid 3px #ddd;
+	padding: 10px;
+}
+
+tr {
+	margin: 5px;
+}
+
+th {
+	padding: 5px;
+	color: white;
+	background: darkgray;
+}
+
+td {
+	padding: 5px;
+	color: black;
+	background: #f0f0f0;
+}
+</style>
 </head>
 
 <body>
 	<h1>Todo page</h1>
+	<hr />
+	<form method="post" action="/jump_to_delete" th:object="${formModel}">
 	<table>
-		<form method="post" action="/" th:object="${formModel}">
-			<tr>
-				<td><label for="userID">user_id</label></td>
-				<td><input type="text" name="userID" th:value="*{userID}" /></td>
-			</tr>
-			<tr>
-				<td><label for="todoText">Todo</label></td>
-				<td><input type="text" name="todoText" th:value="*{todoText}" /></td>
-			</tr>
 		<tr>
-			<td></td>
-			<td><input type="submit" /></td>
+			<th>todo_id</th>
+			<th>Todo</th>
+			<th>created_date</th>
+			<th>Todo</th>
 		</tr>
-		</form>
+		<tr th:each="obj : ${datalist}">
+			<td><input type="checkbox" th:value="|${obj.todoID}|" /></td>
+			<td><a href="edit.html" th:href="@{/edit/} + ${obj.todoID}"><p th:text="${obj.todoText}"></p></a></td>
+			<td th:text="${obj.createdDate}"></td>
+			<td th:text="${obj.uploadDate}"></td>
+		</tr>
 	</table>
-	<hr/>
-	<table>
-	<tr><th>user_id</th><th>Todo</th><th>created_date</th><th>Todo</th></tr>
-	<tr th:each="obj : ${datalist}">
-		<td th:text="${obj.userID}"></td>
-		<td th:text="${obj.todoText}"></td>
-		<td th:text="${obj.createdDate}"></td>
-		<td th:text="${obj.uploadDate}"></td>
-	</tr>
-	</table>
+	<input type="submit" value="削除" />
+	</form>
+	<form method="post" action="/jump_to_add" th:object="${formModel}">
+		<input type="submit" value="追加" />
+	</form>
 </body>
 
 </html>

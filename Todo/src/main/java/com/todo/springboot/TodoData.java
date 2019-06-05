@@ -8,10 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
-
 @Entity
-@Table(name="todo")
+@Table(name = "todo")
 
 public class TodoData {
 	@Id
@@ -35,6 +33,7 @@ public class TodoData {
 	public long getTodoID() {
 		return todoID;
 	}
+
 	public void setTodoID(long todoID) {
 		this.todoID = todoID;
 	}
@@ -42,6 +41,7 @@ public class TodoData {
 	public String getUserID() {
 		return userID;
 	}
+
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
@@ -49,6 +49,7 @@ public class TodoData {
 	public String getTodoText() {
 		return todo_text;
 	}
+
 	public void setTodoText(String todoText) {
 		this.todo_text = todoText;
 	}
@@ -56,6 +57,7 @@ public class TodoData {
 	public String getCreatedDate() {
 		return created_date;
 	}
+
 	public void setCreatedDate(String createdDate) {
 		this.created_date = createdDate;
 	}
@@ -63,6 +65,7 @@ public class TodoData {
 	public String getUploadDate() {
 		return upload_date;
 	}
+
 	public void setUploadDate(String uploadDate) {
 		this.upload_date = uploadDate;
 	}

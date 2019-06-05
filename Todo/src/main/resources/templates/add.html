@@ -34,15 +34,13 @@ td {
 </style>
 </head>
 <body>
-	<h1>Edit page</h1>
+	<h1>Add page</h1>
 	<table>
-		<form method="post" action="/edit" th:object="${formModel}">
-			<input type="hidden" name="todoID" th:value="*{todoID}" /> 
-			<input type="hidden" name="userID" th:value="*{userID}" /> 
-			<input type="hidden" name="createdDate" th:value="*{createdDate}" />
+		<form method="post" action="/add" th:object="${formModel}">
+			<input type="hidden" name="userID" th:value="1" /> 
 			<tr>
 				<td><label for="todoText">Todo</label></td>
-				<td><input type="text" name="todoText" th:value="*{todoText}" /></td>
+				<td><input type="text" name="todoText" th:value="${todoText}" /></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -51,4 +49,5 @@ td {
 		</form>
 	</table>
 </body>
+
 </html>
