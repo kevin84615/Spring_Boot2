@@ -34,15 +34,6 @@ public class TodoController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/", method = RequestMethod.POST)
-//	@Transactional(readOnly = false)
-//	public ModelAndView form(@ModelAttribute("formModel") TodoData mydata, ModelAndView mav) {
-//		mydata.setCreatedDate(time);
-//		mydata.setUploadDate(time);
-//		repository.saveAndFlush(mydata);
-//		return new ModelAndView("redirect:/");
-//	}
-
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView add(ModelAndView mav) {
 		mav.setViewName("add");
@@ -74,16 +65,6 @@ public class TodoController {
 		mydata.setUploadDate(time);
 		repository.saveAndFlush(mydata);
 		return new ModelAndView("redirect:/");
-	}
-	
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable int todoID,
-			ModelAndView mav) {
-		mav.setViewName("delete");
-		mav.addObject("title","delete mydata.");
-		Optional<TodoData> data = repository.findById((long)todoID);
-		mav.addObject("formModel",data.get());
-		return mav;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
