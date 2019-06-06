@@ -47,14 +47,12 @@ td {
 		<tr>
 			<th></th>
 			<th>Todo</th>
-			<th>created_date</th>
-			<th>Todo</th>
+			<th>update_date</th>
 		</tr>
 		<tr th:each="obj : ${datalist}">
 			<td><input type="checkbox" name="multiple" th:value="${obj.todoID}"/></td>
 			<td><a href="edit.html" th:href="@{/edit/} + ${obj.todoID}"><p th:text="${obj.todoText}"></p></a></td>
-			<td th:text="${obj.createdDate}"></td>
-			<td th:text="${obj.uploadDate}"></td>
+			<td th:each="date : ${Date}"><p th:text="${date}"></td>
 		</tr>
 	</table>
 	<input type="submit" value="削除" />
