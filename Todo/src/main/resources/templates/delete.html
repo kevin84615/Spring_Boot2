@@ -26,6 +26,7 @@ td {
 	<h1 th:text="${title}">Delete page</h1>
 	<table>
 		<form method="post" action="/deleteEnd" th:object="${formModel}">
+			<input type="hidden" name="multiple" th:value="${multiple}" />
 			<input type="hidden" name="todoID" th:value="*{todoID}" />
 			<tr>
 				<td><p th:text="|todoid：　*{todoID}|"></p></td>

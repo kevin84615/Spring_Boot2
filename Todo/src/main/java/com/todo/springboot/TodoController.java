@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.todo.springboot.repositories.TodoRepository;
@@ -66,23 +65,27 @@ public class TodoController {
 		repository.saveAndFlush(mydata);
 		return new ModelAndView("redirect:/");
 	}
-	
+
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@Transactional(readOnly=false)
-	public ModelAndView remove(@ModelAttribute("formModel") TodoData mydata,@RequestParam long todoID, 
+	@Transactional(readOnly = false)
+	public ModelAndView remove(@ModelAttribute("formModel") TodoData mydata,
 			ModelAndView mav) {
 		mav.setViewName("delete");
-		mav.addObject("title","delete mydata.");
-		Optional<TodoData> data = repository.findById((long)todoID);
-		mav.addObject("formModel",data.get());
+		mav.addObject("title", "delete mydata.");
+		Long[]todoID = MultipleDelete.todo_id(mydata);
+		Optional<TodoData> data = repository.findById((long) todoID[0]);
+		mav.addObject("formModel", data.get());
+		mav.addObject("multiple", mydata.getMultiple());
 		return mav;
 	}
 
 	@RequestMapping(value = "/deleteEnd", method = RequestMethod.POST)
-	@Transactional(readOnly=false)
-	public ModelAndView removeconfirm(@RequestParam long todoID, 
-			ModelAndView mav) {
-		repository.deleteById(todoID);
+	@Transactional(readOnly = false)
+	public ModelAndView removeconfirm(TodoData mydata,ModelAndView mav) {
+		Long[]todoID = MultipleDelete.todo_id(mydata);
+		for(long delete_counter : todoID) {
+			repository.deleteById(delete_counter);
+		}
 		return new ModelAndView("redirect:/");
 	}
 }

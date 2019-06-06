@@ -30,6 +30,9 @@ public class TodoData {
 	@Column(nullable = true)
 	private String upload_date;
 
+	@Column(nullable = true)
+	private String multiple;
+
 	public long getTodoID() {
 		return todoID;
 	}
@@ -68,5 +71,13 @@ public class TodoData {
 
 	public void setUploadDate(String uploadDate) {
 		this.upload_date = uploadDate;
+	}
+
+	public String getMultiple() {
+		return multiple;
+	}
+
+	public void setMultiple(String multiple) {
+		this.multiple = multiple;
 	}
 }
