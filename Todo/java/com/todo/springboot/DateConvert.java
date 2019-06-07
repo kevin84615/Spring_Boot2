@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DateConvert {
-	public static ArrayList<String> Date(Iterable<TodoData> list,ArrayList<String> Convert_Date) {
-		for(TodoData s : list){
+	public static ArrayList<String> Date(Iterable<TodoData> list, ArrayList<String> Convert_Date) {
+		for (TodoData s : list) {
 
 			String upload_date = s.getUploadDate();
 			upload_date = upload_date.replaceFirst("(?i)(-)", "年");

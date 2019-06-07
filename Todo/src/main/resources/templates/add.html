@@ -37,7 +37,7 @@ td {
 	<h1>Add page</h1>
 	<table>
 		<form method="post" action="/add" th:object="${formModel}">
-			<input type="hidden" name="userID" th:value="1" /> 
+			<input type="hidden" name="userID" th:value="1" />
 			<tr>
 				<td><label for="todoText">Todo</label></td>
 				<td><input type="text" name="todoText" th:value="${todoText}" /></td>
@@ -49,8 +49,7 @@ td {
 		</form>
 	</table>
 	<form method="post" action="other">
-		<br />
-		<input type="submit" value="cancel" />
+		<br /> <input type="submit" value="cancel" />
 	</form>
 </body>
 

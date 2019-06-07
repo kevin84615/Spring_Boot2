@@ -25,7 +25,7 @@ public class MultipleDelete {
 		multiple = multiple.replaceAll(",", "");
 		// convert to String array
 		String[] array_string = multiple.split("&split;%");
-		//put todoText to new array
+		// put todoText to new array
 		int counter = array_string.length / 2;
 		String[] array_long = new String[counter];
 		int c = 1;

@@ -25,11 +25,11 @@ td {
 <body>
 	<h1>Delete page</h1>
 	<table>
-		<form method="post" action="/deleteEnd" >
+		<form method="post" action="/deleteEnd">
 			<input type="hidden" name="multiple" th:value="${multiple}" />
-			<tr th:each="memo : ${text}">
-				<td><p th:text="|text：　${memo}|"></p></td>
-			</tr>
+		<tr th:each="memo : ${text}">
+			<td><p th:text="|text：　${memo}|"></p></td>
+		</tr>
 		<tr>
 			<td><input type="submit" value="delete" /></td>
 		</tr>
