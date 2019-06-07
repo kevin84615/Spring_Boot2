@@ -23,16 +23,12 @@ td {
 </style>
 </head>
 <body>
-	<h1 th:text="${title}">Delete page</h1>
+	<h1>Delete page</h1>
 	<table>
-		<form method="post" action="/deleteEnd" th:object="${formModel}">
+		<form method="post" action="/deleteEnd" >
 			<input type="hidden" name="multiple" th:value="${multiple}" />
-			<input type="hidden" name="todoID" th:value="*{todoID}" />
-			<tr>
-				<td><p th:text="|todoid：　*{todoID}|"></p></td>
-			</tr>
-			<tr>
-				<td><p th:text="|text：　*{todoText}|"></p></td>
+			<tr th:each="memo : ${text}">
+				<td><p th:text="|text：　${memo}|"></p></td>
 			</tr>
 		<tr>
 			<td><input type="submit" value="delete" /></td>

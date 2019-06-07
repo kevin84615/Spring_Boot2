@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,6 @@ public class TodoController {
 	public ModelAndView edit(@ModelAttribute TodoData mydata, @PathVariable int todoid, ModelAndView mav,
 			String created_date, String user_id) {
 		mav.setViewName("edit");
-		mav.addObject("title", "edit mydata.");
 		Optional<TodoData> data = repository.findById((long) todoid);
 		mav.addObject("formModel", data.get());
 		return mav;
@@ -75,10 +75,8 @@ public class TodoController {
 	public ModelAndView remove(@ModelAttribute("formModel") TodoData mydata,
 			ModelAndView mav) {
 		mav.setViewName("delete");
-		mav.addObject("title", "delete mydata.");
-		Long[]todoID = MultipleDelete.todo_id(mydata);
-		Optional<TodoData> data = repository.findById((long) todoID[0]);
-		mav.addObject("formModel", data.get());
+		String[]todoText= MultipleDelete.todo_text(mydata);
+		mav.addObject("text",todoText);
 		mav.addObject("multiple", mydata.getMultiple());
 		return mav;
 	}
