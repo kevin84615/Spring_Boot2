@@ -41,7 +41,7 @@ td {
 	function changeUnderline(todoID) {
 		var btn_obj = document.getElementById(todoID + "id");
 		var text_obj = document.getElementById(todoID + "text");
-		
+
 		if (text_obj.style.textDecoration == "line-through") {
 			text_obj.style.textDecoration = "none";
 			btn_obj.value = "完了";
@@ -52,30 +52,36 @@ td {
 	}
 </script>
 </head>
-
 <body>
 	<h1>Todo page</h1>
 	<hr />
-	<form method="post" action="/delete" th:object="${formModel}">
-	<table>
-		<tr>
-			<th></th>
-			<th>Todo</th>
-			<th>update_date</th>
-			<th>button</th>
-		</tr>
-		<tr th:each="obj : ${datalist}">
-			<td><input type="checkbox" name="multiple" th:value="${obj.todoID} +'&split;%'+ ${obj.todoText}+'&split;%'"/></td>
-			<td><a href="edit.html" th:href="@{/edit/} + ${obj.todoID}"><p th:id="${obj.todoID} + text" th:text="${obj.todoText}"></p></a></td>
-			<td th:text="${obj.uploadDate}"></td>
-			<td><input type="button" th:id="${obj.todoID} + id" value="完了" th:onclick="|changeUnderline('${obj.todoID}')|"></td>
-		</tr>
-	</table>
-	<input type="submit" value="削除" />
+	<form method="post" action="/delete">
+		<table>
+			<tr>
+				<th></th>
+				<th>Todo</th>
+				<th>update_date</th>
+				<th>button</th>
+			</tr>
+			<tr th:each="obj : ${datalist}">
+				<td>
+					<input type="checkbox" name="multiple" th:value="${obj.todoID}" />
+				</td>
+				<td>
+					<a href="edit.html" th:href="@{/edit/} + ${obj.todoID}">
+					<p th:id="${obj.todoID} + text" th:text="${obj.todoText}"></p></a>
+				</td>
+				<td th:text="${obj.uploadDate}"></td>
+				<td>
+					<input type="button" th:id="${obj.todoID} + id" value="完了"
+					th:onclick="|changeUnderline('${obj.todoID}')|">
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value="削除" />
 	</form>
 	<form method="post" action="/jump_to_add" th:object="${formModel}">
 		<input type="submit" value="追加" />
 	</form>
 </body>
-
 </html>

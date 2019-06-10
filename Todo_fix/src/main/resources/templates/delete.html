@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>edit page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+h1 {
+	font-size: 18pt;
+	font-weight: bold;
+	color: gray;
+}
+
+body {
+	font-size: 13pt;
+	color: gray;
+	margin: 5px 25px;
+}
+
+td {
+	padding: 0px 20px;
+	background: #eee;
+}
+</style>
+</head>
+<body>
+	<h1>Delete page</h1>
+	<table>
+		<form method="post" action="/deleteEnd" th:object="${formModel}">
+			<input type="hidden" name="todoID" th:value="*{todoID}" />
+			<tr>
+				<td><p th:text="*{todoText}"></p></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="delete" /></td>
+			</tr>
+		</form>
+	</table>
+	
+	<form method="post" action="other">
+		<br /> <input type="submit" value="cancel" />		
+	</form>
+</body>
+</html>
