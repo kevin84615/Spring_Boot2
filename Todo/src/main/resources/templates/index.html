@@ -62,14 +62,12 @@ td {
 			<th></th>
 			<th>Todo</th>
 			<th>update_date</th>
-
 			<th>button</th>
 		</tr>
 		<tr th:each="obj : ${datalist}">
 			<td><input type="checkbox" name="multiple" th:value="${obj.todoID} +'&split;%'+ ${obj.todoText}+'&split;%'"/></td>
 			<td><a href="edit.html" th:href="@{/edit/} + ${obj.todoID}"><p th:id="${obj.todoID} + text" th:text="${obj.todoText}"></p></a></td>
 			<td th:text="${obj.uploadDate}"></td>
-
 			<td><input type="button" th:id="${obj.todoID} + id" value="完了" th:onclick="|changeUnderline('${obj.todoID}')|"</td>
 		</tr>
 	</table>

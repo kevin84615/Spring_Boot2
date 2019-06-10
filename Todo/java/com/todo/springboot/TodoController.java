@@ -1,8 +1,9 @@
 package com.todo.springboot;
 
-import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class TodoController {
 		ArrayList<String> Convert_Date = new ArrayList<>();
 		Convert_Date = DateConvert.Date(list, Convert_Date);
 		mav.addObject("datalist", list);
-		mav.addObject("Date", Convert_Date);
+		mav.addObject("Date", Convert_Date);		
 		return mav;
 	}
 
